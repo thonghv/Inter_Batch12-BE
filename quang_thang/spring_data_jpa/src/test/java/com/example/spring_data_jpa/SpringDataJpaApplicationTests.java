@@ -1,10 +1,10 @@
-package com.example.apimysql;
+package com.example.spring_data_jpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApimysqlApplicationTests {
+class SpringDataJpaApplicationTests {
 
 	@Test
 	void contextLoads() {
