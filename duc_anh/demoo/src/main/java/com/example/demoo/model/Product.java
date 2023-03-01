@@ -3,7 +3,9 @@ package com.example.demoo.model;
 public class Product {
 
 
-
+  private String id;
+  private String name;
+  private Double price;
   public String getId() {
     return id;
   }
@@ -28,9 +30,6 @@ public class Product {
     this.price = price;
   }
 
-  private String id;
-  private String name;
-  private Double price;
 
   public Product(){
 

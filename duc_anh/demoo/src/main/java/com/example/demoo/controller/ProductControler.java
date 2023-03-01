@@ -13,10 +13,11 @@ public class ProductControler {
   private ArrayList<Product> listProducts = new ArrayList<Product>();
 
   public ProductControler(){
-    System.out.println("vvvvvvvvvvvvvvvvvvvvvvv");
+    System.out.println("aaaaaaaaaaaaaaa");
     listProducts.add(new Product("1", "Pen",500.0));
+    listProducts.add(new Product("2", "Book",1000.0));
   }
-
+  //lay product theo id
   @GetMapping("/product/{idProduct}")
   public Product get(@PathVariable String idProduct){
     Product result = null;
@@ -29,8 +30,13 @@ public class ProductControler {
 
     return result;
   }
-
-  @PostMapping("/add")
+  //lay danh sach product
+  @GetMapping("/product/all")
+  public ArrayList<Product> getListProducts(){
+    return listProducts;
+  }
+  //
+  @PostMapping("/product/add")
   public void add(String id, String name, Double price){
     Product product = new Product();
     product.setId(id);
