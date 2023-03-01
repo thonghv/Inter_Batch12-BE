@@ -10,15 +10,15 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource("classpath:beans.xml")
 
 public class SpringBeanApplication {
-   
-   public static void main(String[] args) {
-      ConfigurableApplicationContext context = SpringApplication.run(SpringBeanApplication.class, args);
-      BeanWithXml beanXml = (BeanWithXml) context.getBean("beanWithXml");
-      System.out.println(beanXml.getName());
-      
-      
-      BeanWithAnnotation beanAnnotation = (BeanWithAnnotation) context.getBean("beanWithAnnotation");
-      System.out.println(beanAnnotation.getName());
-   }
-   
+
+  public static void main(String[] args) {
+    ConfigurableApplicationContext context = SpringApplication.run(SpringBeanApplication.class, args);
+    BeanWithXml beanXml = (BeanWithXml) context.getBean("beanWithXml");
+    System.out.println(beanXml.getName());
+
+
+    BeanWithAnnotation beanAnnotation = (BeanWithAnnotation) context.getBean("beanWithAnnotation");
+    System.out.println(beanAnnotation.getName());
+  }
+
 }
