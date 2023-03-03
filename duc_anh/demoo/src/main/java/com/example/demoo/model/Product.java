@@ -1,10 +1,15 @@
 package com.example.demoo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
+@Entity(name = "product")
 public class Product {
-
-
+  @Column
   private String id;
+  @Column
   private String name;
+  @Column
   private Double price;
   public String getId() {
     return id;

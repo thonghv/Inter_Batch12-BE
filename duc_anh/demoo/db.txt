@@ -1,0 +1,11 @@
+
+
+CREATE TABLE Product(
+	id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255),
+    price int
+);
+
+INSERT INTO Product(name, price) VALUES('San pham A', 123);
+INSERT INTO Product(name, price) VALUES('San pham B', 978);
+INSERT INTO Product(name, price) VALUES('San pham C', 454);

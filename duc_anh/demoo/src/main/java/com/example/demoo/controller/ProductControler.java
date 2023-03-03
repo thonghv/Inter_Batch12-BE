@@ -2,6 +2,10 @@ package com.example.demoo.controller;
 
 import com.example.demoo.model.Product;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.example.demoo.repository.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProductControler {
   private ArrayList<Product> listProducts = new ArrayList<Product>();
+  @Autowired
+  private ProductRepo productRepo;
 
   public ProductControler(){
     System.out.println("aaaaaaaaaaaaaaa");
@@ -32,8 +38,8 @@ public class ProductControler {
   }
   //lay danh sach product
   @GetMapping("/product/all")
-  public ArrayList<Product> getListProducts(){
-    return listProducts;
+  public List<Product> getListProducts(){
+    return productRepo.getAll();
   }
   //
   @PostMapping("/product/add")
