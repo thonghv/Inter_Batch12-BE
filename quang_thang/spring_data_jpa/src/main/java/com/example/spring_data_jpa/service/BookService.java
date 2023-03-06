@@ -36,6 +36,7 @@ public class BookService {
 
   public boolean updateFields(String bookId, Map<String, Object> fields) {
     Optional<Book> updateBook = repo.findById(bookId);
+
     if (!updateBook.isPresent()) {
       return false;
     }
@@ -45,6 +46,7 @@ public class BookService {
           field.setAccessible(true);
           ReflectionUtils.setField(field, updateBook.get(), value);
         });
+    repo.save(updateBook.get());
     return true;
   }
 

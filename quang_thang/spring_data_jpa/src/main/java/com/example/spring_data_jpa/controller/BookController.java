@@ -74,7 +74,7 @@ public class BookController {
   }
 
   /**
-   * Update string.
+   * Update Some field of a record.
    *
    * @param id the id
    * @param fields the fields
