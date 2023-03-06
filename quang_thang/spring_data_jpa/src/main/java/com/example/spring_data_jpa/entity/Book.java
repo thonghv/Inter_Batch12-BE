@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
 
-/** The type Book. */
 @Entity
+/** The type Book. */
 public class Book {
   @Id
   @GeneratedValue(generator = "uuid")
