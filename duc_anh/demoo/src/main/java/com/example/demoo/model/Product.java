@@ -2,9 +2,11 @@ package com.example.demoo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity(name = "product")
 public class Product {
+  @Id
   @Column
   private String id;
   @Column
@@ -40,6 +42,10 @@ public class Product {
 
   }
 
+  public Product(String name, Double price) {
+    this.name = name;
+    this.price = price;
+  }
   public Product(String id, String name, Double price) {
     this.id = id;
     this.name = name;

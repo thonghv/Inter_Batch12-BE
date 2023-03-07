@@ -6,11 +6,7 @@ import java.util.List;
 
 import com.example.demoo.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProductControler {
@@ -43,21 +39,19 @@ public class ProductControler {
   }
   //
   @PostMapping("/product/add")
-  public void add(String id, String name, Double price){
-    Product product = new Product();
-    product.setId(id);
-    product.setName(name);
-    product.setPrice(price);
-    listProducts.add(product);
+  public void add(String name, Double price){
+    System.out.println(name + " " + price);
+    productRepo.add(new Product(name, price));
   }
 
-  @DeleteMapping("/remove/{idProduct}")
+  @PutMapping("/product/update/{idProduct}")
+  public void update(@PathVariable String idProduct, String name, Double price){
+    System.out.println(name + " " + price);
+    productRepo.update(idProduct, name, price);
+  }
+
+  @DeleteMapping("product/remove/{idProduct}")
   public void remove(@PathVariable String idProduct){
-    for (Product product : listProducts) {
-      if(product.getId().equals(idProduct)){
-        listProducts.remove(product);
-        break;
-      }
+    productRepo.delete(idProduct);
     }
   }
-}
