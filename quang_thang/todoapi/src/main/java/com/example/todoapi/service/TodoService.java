@@ -22,4 +22,20 @@ public class TodoService {
     todo.setUser(user);
     return todoRepo.save(todo);
   }
+
+  public Todo update(String userId, String todoId, Todo newData) {
+
+    Todo updatedTodo = todoRepo.findByIdAndUserId(todoId, userId);
+    updatedTodo.setTitle(newData.getTitle());
+    updatedTodo.setComplete(newData.isComplete());
+    updatedTodo.setContent(newData.getContent());
+    todoRepo.save(updatedTodo);
+    return updatedTodo;
+  }
+
+  public Todo deleteOne(String userId, String todoId) {
+    Todo deletedTodo = todoRepo.findByIdAndUserId(todoId, userId);
+    todoRepo.delete(deletedTodo);
+    return deletedTodo;
+  }
 }

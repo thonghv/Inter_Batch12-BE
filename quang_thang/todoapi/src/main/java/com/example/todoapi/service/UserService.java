@@ -2,9 +2,12 @@ package com.example.todoapi.service;
 
 import com.example.todoapi.Repo.UserRepo;
 import com.example.todoapi.entity.User;
+import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
 /** The type User service. */
 @Service
@@ -29,7 +32,11 @@ public class UserService {
    * @return the one
    */
   public User getOne(String userID) {
-    return userRepo.findById(userID).get();
+    try {
+      return userRepo.findById(userID).get();
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   /**
@@ -38,8 +45,13 @@ public class UserService {
    * @param newUser the new user
    * @return the user
    */
-  public User add(User newUser) {
-    return userRepo.save(newUser);
+  public boolean add(User newUser) {
+    User existUser = getOne(newUser.getId());
+    if (existUser == null) {
+      userRepo.save(newUser);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -48,13 +60,29 @@ public class UserService {
    * @param user the user
    * @return the user
    */
-  public User update(User user) {
-    return userRepo.save(user);
+  public User update(String userId, User user) {
+    User updatedUser = getOne(userId);
+    updatedUser.setName(user.getName());
+    updatedUser.setEmail(user.getEmail());
+    updatedUser.setTodos(user.getTodos());
+    userRepo.save(updatedUser);
+    return updatedUser;
   }
 
-  public User update(String userID, Map<String, Object> fields) {
-    User user = getOne(userID);
-    return userRepo.save(user);
+  public User update(String userId, Map<String, Object> fields) {
+    Optional<User> updatedUser = userRepo.findById(userId);
+
+    if (!updatedUser.isPresent()) {
+      return null;
+    }
+    fields.forEach(
+        (key, value) -> {
+          Field field = ReflectionUtils.findField(User.class, key);
+          field.setAccessible(true);
+          ReflectionUtils.setField(field, updatedUser.get(), value);
+        });
+    userRepo.save(updatedUser.get());
+    return updatedUser.get();
   }
 
   /**
