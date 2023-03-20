@@ -40,7 +40,9 @@ public class AuthenticationController {
       return ResponseEntity.badRequest()
           .body(
               DataResponseModel.error(
-                  HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), ""));
+                  HttpStatus.BAD_REQUEST.value(),
+                  HttpStatus.BAD_REQUEST.name(),
+                  "Username already exist"));
     }
     User newUser = new User(req.getUsername(), passwordEncoder.encode(req.getPassword()));
     userRepo.save(newUser);
