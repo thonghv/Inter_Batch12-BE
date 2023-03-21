@@ -1,0 +1,74 @@
+2023-03-22 08:43:58,383 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-03-22 08:43:58,464 INFO o.s.b.StartupInfoLogger [restartedMain] Starting HrManagementApiApplication using Java 19.0.2 with PID 16016 (D:\Projects\Working\Intern\main\Inter_Batch12-BE\hr-management-api\target\classes started by ADMIN in D:\Projects\Working\Intern\main\Inter_Batch12-BE\hr-management-api)
+2023-03-22 08:43:58,466 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-03-22 08:43:58,528 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-22 08:43:58,529 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-22 08:43:59,551 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-22 08:43:59,646 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 85 ms. Found 2 JPA repository interfaces.
+2023-03-22 08:44:00,497 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-03-22 08:44:00,515 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-22 08:44:00,516 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-03-22 08:44:00,517 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-22 08:44:00,587 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-03-22 08:44:00,589 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2058 ms
+2023-03-22 08:44:00,779 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Flyway Community Edition 9.5.1 by Redgate
+2023-03-22 08:44:00,780 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+2023-03-22 08:44:00,780 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 
+2023-03-22 08:44:00,802 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-03-22 08:44:01,399 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27418654
+2023-03-22 08:44:01,402 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-03-22 08:44:01,452 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Database: jdbc:mysql://localhost:3306/db_hr_management (MySQL 8.0)
+2023-03-22 08:44:01,588 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Successfully validated 1 migration (execution time 00:00.048s)
+2023-03-22 08:44:01,612 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Current version of schema `db_hr_management`: 1
+2023-03-22 08:44:01,614 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Schema `db_hr_management` is up to date. No migration necessary.
+2023-03-22 08:44:01,750 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-22 08:44:01,862 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-03-22 08:44:02,292 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-22 08:44:03,215 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-22 08:44:03,226 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 08:44:04,336 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-22 08:44:04,619 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@58eb375d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7edd4a2b, org.springframework.security.web.context.SecurityContextHolderFilter@344f407d, org.springframework.security.web.header.HeaderWriterFilter@1a24d8e0, org.springframework.security.web.authentication.logout.LogoutFilter@4c8f332c, com.intern.hrmanagementapi.config.JwtAuthFilter@767d3b60, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6df0f64f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6c34ce0b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@619dc0ac, org.springframework.security.web.session.SessionManagementFilter@56d883ff, org.springframework.security.web.access.ExceptionTranslationFilter@e302393, org.springframework.security.web.access.intercept.AuthorizationFilter@2e48e8d]
+2023-03-22 08:44:04,870 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-03-22 08:44:04,883 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-03-22 08:44:04,979 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-22 08:44:04,993 INFO o.s.b.StartupInfoLogger [restartedMain] Started HrManagementApiApplication in 7.225 seconds (process running for 8.079)
+2023-03-22 08:45:06,284 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-3] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-22 08:45:06,285 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Initializing Servlet 'dispatcherServlet'
+2023-03-22 08:45:06,289 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Completed initialization in 3 ms
+2023-03-22 08:48:20,340 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-03-22 08:48:20,384 INFO o.s.b.StartupInfoLogger [restartedMain] Starting HrManagementApiApplication using Java 19.0.2 with PID 11348 (D:\Projects\Working\Intern\main\Inter_Batch12-BE\hr-management-api\target\classes started by ADMIN in D:\Projects\Working\Intern\main\Inter_Batch12-BE\hr-management-api)
+2023-03-22 08:48:20,385 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-03-22 08:48:20,450 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-22 08:48:20,452 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-22 08:48:21,568 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-22 08:48:21,679 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 100 ms. Found 2 JPA repository interfaces.
+2023-03-22 08:48:22,564 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-03-22 08:48:22,580 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-22 08:48:22,581 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-03-22 08:48:22,582 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-22 08:48:22,658 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-03-22 08:48:22,661 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2205 ms
+2023-03-22 08:48:22,834 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Flyway Community Edition 9.5.1 by Redgate
+2023-03-22 08:48:22,834 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+2023-03-22 08:48:22,835 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 
+2023-03-22 08:48:22,848 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-03-22 08:48:23,364 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7deb0a0f
+2023-03-22 08:48:23,368 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-03-22 08:48:23,413 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Database: jdbc:mysql://localhost:3306/db_hr_management (MySQL 8.0)
+2023-03-22 08:48:23,496 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Successfully validated 1 migration (execution time 00:00.035s)
+2023-03-22 08:48:23,516 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Current version of schema `db_hr_management`: 1
+2023-03-22 08:48:23,518 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Schema `db_hr_management` is up to date. No migration necessary.
+2023-03-22 08:48:23,626 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-22 08:48:23,718 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-03-22 08:48:24,190 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-22 08:48:25,206 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-22 08:48:25,223 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 08:48:26,131 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-22 08:48:26,457 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@78b88b8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@89cb045, org.springframework.security.web.context.SecurityContextHolderFilter@69c1219, org.springframework.security.web.header.HeaderWriterFilter@3c3d2de8, org.springframework.security.web.authentication.logout.LogoutFilter@4a6006a6, com.intern.hrmanagementapi.config.JwtAuthFilter@5f8ccb7a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67f979f7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@350e45ef, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@610f3af, org.springframework.security.web.session.SessionManagementFilter@6df0f64f, org.springframework.security.web.access.ExceptionTranslationFilter@7d382096, org.springframework.security.web.access.intercept.AuthorizationFilter@619dc0ac]
+2023-03-22 08:48:26,643 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-03-22 08:48:26,657 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-03-22 08:48:26,683 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-22 08:48:26,693 INFO o.s.b.StartupInfoLogger [restartedMain] Started HrManagementApiApplication in 7.254 seconds (process running for 8.272)
+2023-03-22 08:48:43,530 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-22 08:48:43,531 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-03-22 08:48:43,536 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 4 ms

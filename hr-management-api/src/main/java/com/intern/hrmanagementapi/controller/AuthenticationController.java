@@ -17,15 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@RequestMapping(value = {"/api/v1/auth"})
-@RequestMapping(value = AuthEndpointConst.ROOT)
+@RequestMapping(value = AuthEndpointConst.BASE_PATH)
 @RequiredArgsConstructor
 public class AuthenticationController {
 
   @Autowired
   private final AuthenticationService authenticationService;
 
-  //  @PostMapping(value = {"/register"})
   @PostMapping(value = {AuthEndpointConst.REGISTER})
   public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto req) {
     var response = authenticationService.register(req);
