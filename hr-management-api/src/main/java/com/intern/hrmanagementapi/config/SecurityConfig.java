@@ -1,5 +1,6 @@
 package com.intern.hrmanagementapi.config;
 
+import com.intern.hrmanagementapi.constant.AuthEndpointConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +25,7 @@ public class SecurityConfig {
 
   private final AuthenticationProvider authenticationProvider;
   private final LogoutHandler logoutHandler;
-  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**", "/swagger-ui.html", "/swagger-ui/*",
-      "/v3/api-docs/*"};
+  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**"};
   @Autowired
   private final JwtAuthFilter jwtAuthFilter;
 
@@ -37,7 +37,7 @@ public class SecurityConfig {
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-    http.logout().logoutUrl("/api/v1/auth/logout").addLogoutHandler(logoutHandler)
+    http.logout().logoutUrl(AuthEndpointConst.LOGOUT).addLogoutHandler(logoutHandler)
         .logoutSuccessHandler((req, res, authentication) -> SecurityContextHolder.clearContext());
     return http.build();
   }

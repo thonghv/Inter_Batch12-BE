@@ -1,4 +1,4 @@
-package com.intern.hrmanagementapi.Model;
+package com.intern.hrmanagementapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationResponseDto {
 
   private String token;
 }

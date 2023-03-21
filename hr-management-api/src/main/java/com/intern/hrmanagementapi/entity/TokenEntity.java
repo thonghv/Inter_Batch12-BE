@@ -7,17 +7,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "tokens")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Token {
+public class TokenEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +33,5 @@ public class Token {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private User user;
+  private UserEntity user;
 }
