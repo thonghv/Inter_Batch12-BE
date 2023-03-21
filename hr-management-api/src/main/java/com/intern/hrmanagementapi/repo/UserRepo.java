@@ -1,10 +1,13 @@
 package com.intern.hrmanagementapi.repo;
 
 import com.intern.hrmanagementapi.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends CrudRepository<User, String> {
+public interface UserRepo extends JpaRepository<User, String> {
 
+
+  Optional<User> findByEmail(String email);
 }
