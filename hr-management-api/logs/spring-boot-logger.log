@@ -1,0 +1,92 @@
+2023-03-21 14:36:33,677 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-03-21 14:36:33,803 INFO o.s.b.StartupInfoLogger [restartedMain] Starting HrManagementApiApplication using Java 17.0.6 with PID 3692 (D:\code\Inter_Batch12-BE\hr-management-api\target\classes started by Admin in D:\code\Inter_Batch12-BE\hr-management-api)
+2023-03-21 14:36:33,805 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-03-21 14:36:34,002 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-21 14:36:34,003 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-21 14:36:35,738 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-21 14:36:35,869 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interfaces.
+2023-03-21 14:36:37,341 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-03-21 14:36:37,362 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-21 14:36:37,364 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-03-21 14:36:37,365 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-21 14:36:37,535 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-03-21 14:36:37,539 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 3530 ms
+2023-03-21 14:36:37,937 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Flyway Community Edition 9.5.1 by Redgate
+2023-03-21 14:36:37,937 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+2023-03-21 14:36:37,938 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 
+2023-03-21 14:36:37,959 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 1 SQL migrations were detected but not run because they did not follow the filename convention.
+2023-03-21 14:36:37,959 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] If this is in error, enable debug logging or 'validateMigrationNaming' to fail fast and see a list of the invalid file names.
+2023-03-21 14:36:37,965 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-03-21 14:36:38,316 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ef02f65
+2023-03-21 14:36:38,319 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-03-21 14:36:38,332 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Database: jdbc:mysql://localhost:3306/db_hr_management (MySQL 5.5)
+2023-03-21 14:36:38,434 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Successfully validated 0 migrations (execution time 00:00.018s)
+2023-03-21 14:36:38,434 WARN o.f.c.i.l.s.Slf4jLog [restartedMain] No migrations found. Are your locations set up correctly?
+2023-03-21 14:36:38,451 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Current version of schema `db_hr_management`: << Empty Schema >>
+2023-03-21 14:36:38,454 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Schema `db_hr_management` is up to date. No migration necessary.
+2023-03-21 14:36:38,643 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-21 14:36:38,734 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-03-21 14:36:39,307 WARN o.h.d.Dialect [restartedMain] HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 5.7.0. Check the community dialects project for available legacy versions.
+2023-03-21 14:36:39,315 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-21 14:36:40,602 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-21 14:36:40,621 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-21 14:36:41,094 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-21 14:36:41,704 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-03-21 14:36:41,726 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-03-21 14:36:41,805 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-21 14:36:41,837 INFO o.s.b.StartupInfoLogger [restartedMain] Started HrManagementApiApplication in 9.189 seconds (process running for 10.26)
+2023-03-21 14:36:53,050 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-21 14:36:53,051 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-03-21 14:36:53,053 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2023-03-21 14:36:53,200 INFO c.i.h.c.UserController [http-nio-8080-exec-1] An INFO Message
+2023-03-21 14:36:53,201 WARN c.i.h.c.UserController [http-nio-8080-exec-1] A WARN Message
+2023-03-21 14:36:53,202 ERROR c.i.h.c.UserController [http-nio-8080-exec-1] An ERROR Message
+2023-03-21 14:37:36,544 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-21 14:37:36,550 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-03-21 14:37:36,574 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-03-21 14:37:46,105 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-03-21 14:37:46,195 INFO o.s.b.StartupInfoLogger [restartedMain] Starting HrManagementApiApplication using Java 17.0.6 with PID 7812 (D:\code\Inter_Batch12-BE\hr-management-api\target\classes started by Admin in D:\code\Inter_Batch12-BE\hr-management-api)
+2023-03-21 14:37:46,197 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-03-21 14:37:46,471 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-21 14:37:46,472 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-21 14:37:48,186 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-21 14:37:48,300 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 97 ms. Found 1 JPA repository interfaces.
+2023-03-21 14:37:49,760 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-03-21 14:37:49,783 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-21 14:37:49,786 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-03-21 14:37:49,786 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-21 14:37:49,934 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-03-21 14:37:49,939 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 3461 ms
+2023-03-21 14:37:50,300 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Flyway Community Edition 9.5.1 by Redgate
+2023-03-21 14:37:50,300 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+2023-03-21 14:37:50,301 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 
+2023-03-21 14:37:50,325 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] 1 SQL migrations were detected but not run because they did not follow the filename convention.
+2023-03-21 14:37:50,325 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] If this is in error, enable debug logging or 'validateMigrationNaming' to fail fast and see a list of the invalid file names.
+2023-03-21 14:37:50,329 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-03-21 14:37:50,639 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a5e945f
+2023-03-21 14:37:50,643 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-03-21 14:37:50,659 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Database: jdbc:mysql://localhost:3306/db_hr_management (MySQL 5.5)
+2023-03-21 14:37:50,765 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Successfully validated 0 migrations (execution time 00:00.017s)
+2023-03-21 14:37:50,765 WARN o.f.c.i.l.s.Slf4jLog [restartedMain] No migrations found. Are your locations set up correctly?
+2023-03-21 14:37:50,786 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Current version of schema `db_hr_management`: << Empty Schema >>
+2023-03-21 14:37:50,789 INFO o.f.c.i.l.s.Slf4jLog [restartedMain] Schema `db_hr_management` is up to date. No migration necessary.
+2023-03-21 14:37:50,985 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-21 14:37:51,087 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-03-21 14:37:51,674 WARN o.h.d.Dialect [restartedMain] HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 5.7.0. Check the community dialects project for available legacy versions.
+2023-03-21 14:37:51,682 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-21 14:37:52,999 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-21 14:37:53,018 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-21 14:37:53,498 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-21 14:37:54,053 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-03-21 14:37:54,071 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-03-21 14:37:54,113 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-21 14:37:54,131 INFO o.s.b.StartupInfoLogger [restartedMain] Started HrManagementApiApplication in 8.963 seconds (process running for 10.089)
+2023-03-21 14:37:59,797 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-21 14:37:59,798 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-03-21 14:37:59,801 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 3 ms
+2023-03-21 14:37:59,929 INFO c.i.h.c.UserController [http-nio-8080-exec-1] call api get /users
+2023-03-21 14:38:14,760 INFO c.i.h.c.UserController [http-nio-8080-exec-2] call api get /users
+2023-03-21 14:38:20,643 INFO c.i.h.c.UserController [http-nio-8080-exec-3] call api get /users
+2023-03-21 14:39:53,058 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-21 14:39:53,065 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-03-21 14:39:53,089 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
