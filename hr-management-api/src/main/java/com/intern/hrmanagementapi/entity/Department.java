@@ -27,8 +27,8 @@ public class Department {
     private String name;
     @Column
     private String address;
-    @Column
-    private Date createdData;
-    @Column
-    private Date updateData;
+    @Column(name = "created_date")
+    private Date createdDate;
+    @Column(name = "update_date")
+    private Date updateDate;
 }

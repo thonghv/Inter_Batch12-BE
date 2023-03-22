@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/Department")
+@RequestMapping("/api/v1/department")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    @GetMapping
+    @GetMapping("/")
     public Object getAll() {
         return departmentService.getAllDepartment();
     }
