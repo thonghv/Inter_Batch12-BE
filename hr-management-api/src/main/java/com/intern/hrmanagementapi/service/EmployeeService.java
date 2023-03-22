@@ -15,33 +15,62 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepo repository;
 
-    //Add a new employee
+    /**
+     * Save a new Employee object to the database.
+     *
+     * @param employee the Employee object to be saved
+     * @return the saved Employee object
+     */
     public Employee saveEmployee(Employee employee) {
         return repository.save(employee);
     }
 
-    //Add new employee list
+    /**
+     * Save a list of employees to the database.
+     *
+     * @param employees The list of employees to save.
+     * @return The list of saved employees.
+     */
     public List<Employee> saveEmployees(List<Employee> employees) {
         return repository.saveAll(employees);
     }
 
-    //Get all employees
+    /**
+     * Get a list of all employees.
+     *
+     * @return A list of all employees in the database.
+     */
     public List<Employee> getEmployees() {
         return repository.findAll();
     }
 
-    //Get an employee by id
+    /**
+     * Get an employee by id
+     *
+     * @param id the id of the employee to retrieve
+     * @return the employee with the specified id or null if not found
+     */
     public Employee getEmployeeById(int id) {
         return repository.findById(id).orElse(null);
     }
 
-    //Delete an employee
+    /**
+     * Deletes the employee with the given ID from the database.
+     *
+     * @param id the ID of the employee to be deleted
+     * @return a message indicating that the employee has been removed
+     */
     public String deleteEmployee(int id) {
         repository.deleteById(id);
         return "Employee removed !! " + id;
     }
 
-    //Update an employee
+    /**
+     * Updates the information of an existing employee.
+     *
+     * @param employee The employee object to be updated.
+     * @return The updated employee object.
+     */
     public Employee updateEmployee(Employee employee) {
         Employee existingEmployee = repository.findById(employee.getId()).orElse(null);
         existingEmployee.setFirstName(employee.getFirstName());
@@ -56,20 +85,34 @@ public class EmployeeService {
         return repository.save(existingEmployee);
     }
 
-    //Search employees by name (both first and last name)
-    public List<Employee> getEmployeeByName(String name) {
-        return repository.findByName(name);
-    }
-
-    //Ordered by {orderBy}
-    public List<Employee> sort(String orderBy) {
-        Sort sort = Sort.by(orderBy);
-        return repository.findAll(sort);
-    }
-
-    //Pagination
-    public Page<Employee> getEmployeesByPage(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+    /**
+     * Retrieves a paginated list of employees sorted by a given field.
+     *
+     * @param orderBy the field to sort by (optional)
+     * @param pageNumber the page number to retrieve
+     * @param pageSize the number of employees per page
+     * @return a Page object containing the requested employees
+     */
+    public Page<Employee> getEmployeesByPageAndSort(String orderBy, int pageNumber, int pageSize) {
+        Pageable pageable;
+        if (orderBy != null) {
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by(orderBy));
+        } else {
+            pageable = PageRequest.of(pageNumber, pageSize);
+        }
         return repository.findAll(pageable);
+    }
+
+    /**
+     * Retrieves a page of employees matching the given name, sorted by name, and with pagination.
+     *
+     * @param name The name to search for.
+     * @param pageNumber The page number to retrieve (starting from 0).
+     * @param pageSize The number of elements to retrieve per page.
+     * @return A page of employees matching the given name.
+     */
+    public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return repository.findByNameContainingIgnoreCase(name, pageable);
     }
 }

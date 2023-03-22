@@ -1,5 +1,7 @@
 package com.intern.hrmanagementapi.controller;
 
+import com.intern.hrmanagementapi.constant.AuthEndpointConst;
+import com.intern.hrmanagementapi.constant.EmpEndPointConst;
 import com.intern.hrmanagementapi.entity.Employee;
 import com.intern.hrmanagementapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping(value = {EmpEndPointConst.BASE_PATH})
 public class EmployeeController {
     @Autowired
     private EmployeeService service;
@@ -18,42 +20,36 @@ public class EmployeeController {
         return service.saveEmployee(employee);
     }
 
-    @PostMapping("/batch")
+    @PostMapping(value = {EmpEndPointConst.EMPLOYEE_LIST})
     public List<Employee> addEmployees(@RequestBody List<Employee> employees) {
         return service.saveEmployees(employees);
     }
 
     @GetMapping()
-    public List<Employee> findAllEmployees(@RequestParam(required = false) String orderBy) {
-        if (orderBy != null) {
-            return service.sort(orderBy);
-        }
-        return service.getEmployees();
+    public Page<Employee> getEmployees(@RequestParam(required = false) String orderBy,
+                                       @RequestParam int pageNumber,
+                                       @RequestParam int pageSize) {
+        return service.getEmployeesByPageAndSort(orderBy, pageNumber, pageSize);
     }
 
-    @GetMapping("/{id}")
-    public Employee findEmployeeById(@PathVariable int id) {
+    @GetMapping()
+    public Employee findEmployeeById(@RequestParam int id) {
         return service.getEmployeeById(id);
     }
 
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+    @PutMapping()
+    public Employee updateEmployee(@RequestParam int id, @RequestBody Employee employee) {
         employee.setId(id);
         return service.updateEmployee(employee);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteEmployee(@PathVariable int id) {
+    @DeleteMapping()
+    public String deleteEmployee(@RequestParam int id) {
         return service.deleteEmployee(id);
     }
 
-    @GetMapping("/search/{name}")
-    public List<Employee> findEmployeeByName(@PathVariable String name) {
-        return service.getEmployeeByName(name);
+    @GetMapping(value = {EmpEndPointConst.SEARCH})
+    public Page<Employee> findEmployeeByName(@RequestParam String name, @RequestParam int pageNumber, @RequestParam int pageSize) {
+        return service.getEmployeeByName(name, pageNumber, pageSize);
     }
-    @GetMapping("/pagination")
-    public Page<Employee> getEmployeesByPage(@RequestParam int pageNumber, @RequestParam int pageSize) {
-        return service.getEmployeesByPage(pageNumber, pageSize);
-    }
-
 }

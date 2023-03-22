@@ -17,4 +17,6 @@ public interface EmployeeRepo extends JpaRepository<Employee,Integer> {
     List<Employee> findByName(@Param("name") String name);
     List<Employee> findAllByOrderByFirstNameAsc();
     Page<Employee> findAll(Pageable pageable);
+
+    Page<Employee> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }
