@@ -6,11 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
   @Autowired
   UserRepo userRepo;
-
-
   public Object getAllUser() {
     return userRepo.findAll();
   }

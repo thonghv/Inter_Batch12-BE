@@ -6,16 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hr-management-api" />
+        <module name="spring_data_jpa" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hr-management-api" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="hr-management-api" options="-parameters" />
+      <module name="spring_data_jpa" options="-parameters" />
     </option>
   </component>
 </project>
