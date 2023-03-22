@@ -1,7 +1,6 @@
 package com.intern.hrmanagementapi.controller;
 
-import com.intern.hrmanagementapi.constant.AuthEndpointConst;
-import com.intern.hrmanagementapi.constant.EmpEndPointConst;
+import com.intern.hrmanagementapi.constant.EndpointConst;
 import com.intern.hrmanagementapi.entity.Employee;
 import com.intern.hrmanagementapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping(value = {EmpEndPointConst.BASE_PATH})
+@RequestMapping(value = {EndpointConst.BASE_PATH})
 public class EmployeeController {
     @Autowired
     private EmployeeService service;
@@ -20,7 +19,7 @@ public class EmployeeController {
         return service.saveEmployee(employee);
     }
 
-    @PostMapping(value = {EmpEndPointConst.EMPLOYEE_LIST})
+    @PostMapping(value = {EndpointConst.EMPLOYEE_LIST})
     public List<Employee> addEmployees(@RequestBody List<Employee> employees) {
         return service.saveEmployees(employees);
     }
@@ -48,7 +47,7 @@ public class EmployeeController {
         return service.deleteEmployee(id);
     }
 
-    @GetMapping(value = {EmpEndPointConst.SEARCH})
+    @GetMapping(value = {EndpointConst.SEARCH})
     public Page<Employee> findEmployeeByName(@RequestParam String name, @RequestParam int pageNumber, @RequestParam int pageSize) {
         return service.getEmployeeByName(name, pageNumber, pageSize);
     }
