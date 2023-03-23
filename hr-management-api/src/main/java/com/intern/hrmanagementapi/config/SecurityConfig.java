@@ -1,6 +1,6 @@
 package com.intern.hrmanagementapi.config;
 
-import com.intern.hrmanagementapi.constant.AuthEndpointConst;
+import com.intern.hrmanagementapi.constant.EndpointConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +37,7 @@ public class SecurityConfig {
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-    http.logout().logoutUrl(AuthEndpointConst.LOGOUT).addLogoutHandler(logoutHandler)
+    http.logout().logoutUrl(EndpointConst.LOGOUT).addLogoutHandler(logoutHandler)
         .logoutSuccessHandler((req, res, authentication) -> SecurityContextHolder.clearContext());
     return http.build();
   }

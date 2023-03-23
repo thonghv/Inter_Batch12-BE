@@ -1,6 +1,7 @@
 package com.intern.hrmanagementapi.entity;
 
 import com.intern.hrmanagementapi.type.UserRole;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -48,7 +49,7 @@ public class UserEntity implements UserDetails {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<TokenEntity> tokens;
 
   @Override

@@ -1,11 +1,12 @@
 package com.intern.hrmanagementapi.controller;
 
-import com.intern.hrmanagementapi.constant.AuthEndpointConst;
+import com.intern.hrmanagementapi.constant.EndpointConst;
 import com.intern.hrmanagementapi.constant.MessageConst;
 import com.intern.hrmanagementapi.model.AuthenticationRequestDto;
 import com.intern.hrmanagementapi.model.DataResponseDto;
 import com.intern.hrmanagementapi.model.RegisterRequestDto;
 import com.intern.hrmanagementapi.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = AuthEndpointConst.BASE_PATH)
+@RequestMapping(value = EndpointConst.AUTH_BASE_PATH)
 @RequiredArgsConstructor
+@Tag(name = "Authentication", description = "The authentication API")
 public class AuthenticationController {
 
   @Autowired
   private final AuthenticationService authenticationService;
 
-  @PostMapping(value = {AuthEndpointConst.REGISTER})
+  @PostMapping(value = {EndpointConst.REGISTER})
   public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto req) {
     var response = authenticationService.register(req);
     return ResponseEntity.ok(
         DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
   }
 
-  @PostMapping(value = {AuthEndpointConst.LOGIN})
+  @PostMapping(value = {EndpointConst.LOGIN})
   public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequestDto req) {
     var response = authenticationService.authenticate(req);
     return ResponseEntity.ok(
