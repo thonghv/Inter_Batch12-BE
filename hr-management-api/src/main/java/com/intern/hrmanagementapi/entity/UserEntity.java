@@ -1,24 +1,21 @@
 package com.intern.hrmanagementapi.entity;
 
 import com.intern.hrmanagementapi.type.UserRole;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.intern.hrmanagementapi.type.UserState;
+import jakarta.persistence.*;
+
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +35,6 @@ public class UserEntity implements UserDetails {
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   @JdbcTypeCode(SqlTypes.VARCHAR)
   private UUID id;
-
   @Column(nullable = false, unique = true)
   private String username;
 
@@ -49,7 +45,21 @@ public class UserEntity implements UserDetails {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  @Enumerated(EnumType.STRING)
+  private UserState state;
+
+  @OneToOne
+  @JoinColumn(name = "employee_id")
+  private Employee employee;
+
+  @CreationTimestamp
+  @Column
+  private Date create_date;
+  @UpdateTimestamp
+  @Column
+  private Date update_date;
+
+  @OneToMany(mappedBy = "user")
   private List<TokenEntity> tokens;
 
   @Override
@@ -65,6 +75,10 @@ public class UserEntity implements UserDetails {
   @Override
   public String getUsername() {
     return email;
+  }
+
+  public String getRightUsername() {
+    return username;
   }
 
   @Override
