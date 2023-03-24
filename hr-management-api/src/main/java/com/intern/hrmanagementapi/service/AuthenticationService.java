@@ -1,7 +1,9 @@
 package com.intern.hrmanagementapi.service;
 
+import com.intern.hrmanagementapi.constant.MessageConst;
 import com.intern.hrmanagementapi.entity.TokenEntity;
 import com.intern.hrmanagementapi.entity.UserEntity;
+import com.intern.hrmanagementapi.exception.ObjectExistsException;
 import com.intern.hrmanagementapi.model.AuthenticationRequestDto;
 import com.intern.hrmanagementapi.model.AuthenticationResponseDto;
 import com.intern.hrmanagementapi.model.RegisterRequestDto;
@@ -10,6 +12,7 @@ import com.intern.hrmanagementapi.repo.UserRepo;
 import com.intern.hrmanagementapi.type.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +40,21 @@ public class AuthenticationService {
    * @param req the register request body
    * @return the jwt token
    */
-  public AuthenticationResponseDto register(RegisterRequestDto req) {
+  public AuthenticationResponseDto register(RegisterRequestDto req) throws ObjectExistsException {
+
+    UserEntity existedUser = userRepo.findByEmail(req.getEmail()).orElse(null);
+    UserEntity existedUserByUsername = userRepo.findByUsername(req.getUsername()).orElse(null);
+
+    if (existedUser != null) {
+      throw new ObjectExistsException(
+          String.format("%s - %s", req.getEmail(), MessageConst.USER_EXISTED),
+          HttpStatus.BAD_REQUEST, null);
+    }
+    if (existedUserByUsername != null) {
+      throw new ObjectExistsException(
+          String.format("%s - %s", req.getUsername(), MessageConst.USER_EXISTED),
+          HttpStatus.BAD_REQUEST, null);
+    }
 
     UserEntity user = UserEntity.builder().username(req.getUsername()).email(req.getEmail())
         .password(passwordEncoder.encode(req.getPassword())).role(UserRole.USER).build();

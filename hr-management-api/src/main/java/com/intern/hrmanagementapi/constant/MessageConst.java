@@ -7,4 +7,5 @@ public class MessageConst {
   public static final String FILE_UPLOAD_FAILED = "Could not upload the file";
   public static final String FILE_NOT_EXIST = "File doesn't exist";
   public static final String FILE_UPLOAD_EMPTY = "File upload empty";
+  public static final String USER_EXISTED = "User already exist";
 }
