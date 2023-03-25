@@ -9,6 +9,10 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+<<<<<<< HEAD
+=======
+import java.util.Date;
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
 import java.util.UUID;
 
 @Data
@@ -23,6 +27,7 @@ public class Employee {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
+<<<<<<< HEAD
     @Column(name = "firstName", nullable = false)
     private String firstName;
     @Column(name = "lastName", nullable = false)
@@ -43,6 +48,29 @@ public class Employee {
     private int educationId;
 
     private LocalDateTime createDate;
+=======
+
+    private String firstName;
+
+    private String lastName;
+
+    private int gender;
+
+    private String address;
+
+    private LocalDateTime dob;
+
+    private int departmentId;
+
+    private int positionId;
+
+    private int contractId;
+
+    private int educationId;
+
+    private LocalDateTime createDate;
+
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
     private LocalDateTime updateDate;
 
 }

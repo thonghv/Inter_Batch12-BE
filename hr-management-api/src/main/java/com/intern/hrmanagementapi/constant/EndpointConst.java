@@ -4,6 +4,7 @@ public final class EndpointConst {
 
 <<<<<<< HEAD
   protected static final String ROOT_V1 = "/api/v1";
+<<<<<<< HEAD
 
   public static final String EMPLOYEE_BASE_PATH = ROOT_V1 + "/employee";
   public static final String EMPLOYEE_LIST = "/batch";
@@ -23,4 +24,9 @@ public final class EndpointConst {
   public static final String FILE_UPLOAD_ONE = "/upload";
   public static final String FILE_DOWNLOAD = "/download/{id}";
 >>>>>>> 16ff767a41d34ece1b5653f01397e32f2380ebef
+=======
+  public static final String BASE_PATH = ROOT_V1 + "/employee";
+  public static final String EMPLOYEE_LIST = "/batch";
+  public static final String SEARCH = "/search";
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
 }

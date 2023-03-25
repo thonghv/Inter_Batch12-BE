@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
 HELP.md
 target/**
 !.mvn/wrapper/maven-wrapper.jar
@@ -33,6 +36,7 @@ build/
 ### VS Code ###
 .vscode/
 logs/**
+<<<<<<< HEAD
 =======
 HELP.md
 target/
@@ -70,3 +74,5 @@ build/
 
 log/
 >>>>>>> 16ff767a41d34ece1b5653f01397e32f2380ebef
+=======
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96

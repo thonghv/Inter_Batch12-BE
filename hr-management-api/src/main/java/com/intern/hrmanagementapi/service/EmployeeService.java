@@ -2,13 +2,21 @@ package com.intern.hrmanagementapi.service;
 
 import com.intern.hrmanagementapi.entity.Employee;
 import com.intern.hrmanagementapi.repo.EmployeeRepo;
+<<<<<<< HEAD
 import com.intern.hrmanagementapi.specification.SearchRequest;
 import com.intern.hrmanagementapi.specification.SearchSpecification;
+=======
+import jakarta.persistence.criteria.Predicate;
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+<<<<<<< HEAD
+=======
+import org.springframework.data.jpa.domain.Specification;
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -115,6 +123,7 @@ public class EmployeeService {
      * @param pageSize The number of elements to retrieve per page.
      * @return A page of employees matching the given name.
      */
+<<<<<<< HEAD
     public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return repository.findByNameContainingIgnoreCase(name, pageable);
@@ -133,5 +142,19 @@ public class EmployeeService {
         SearchSpecification<Employee> specification = new SearchSpecification<>(request);
         Pageable pageable = SearchSpecification.getPageable(request.getPage(), request.getSize());
         return repository.findAll(specification, pageable);
+=======
+//    public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
+//        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+//        return repository.findByNameContainingIgnoreCase(name, pageable);
+//    }
+    public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
+        Specification<Employee> spec = (root, query, criteriaBuilder) -> {
+            Predicate firstNamePredicate = criteriaBuilder.like(root.get("firstName"), "%" + name + "%");
+            Predicate lastNamePredicate = criteriaBuilder.like(root.get("lastName"), "%" + name + "%");
+            return criteriaBuilder.or(firstNamePredicate, lastNamePredicate);
+        };
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return repository.findAll(spec, pageable);
+>>>>>>> c13617b2570236640adbb21be0a98fd7981b9b96
     }
 }
