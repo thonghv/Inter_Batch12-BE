@@ -1,4 +1,4 @@
-package com.intern.hrmanagementapi.util;
+package com.intern.hrmanagementapi.helper;
 
 import java.util.Date;
 import java.util.HashMap;
