@@ -17,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 /**
  * The type Authentication service.
@@ -72,12 +73,16 @@ public class AuthenticationService {
    * @param req the login request body
    * @return the jwt token
    */
-  public AuthenticationResponseDto authenticate(AuthenticationRequestDto req) {
+  public AuthenticationResponseDto authenticate(AuthenticationRequestDto req)
+      throws HttpClientErrorException {
+
+    UserEntity user = userRepo.findByEmail(req.getEmail()).orElse(null);
+    if (user == null || !isPasswordMatches(req.getPassword(), user.getPassword())) {
+      throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+    }
 
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-
-    UserEntity user = userRepo.findByEmail(req.getEmail()).orElseThrow();
 
     String jwtToken = jwtService.generateToken(user);
     revokedAllUserToken(user);
@@ -102,5 +107,9 @@ public class AuthenticationService {
     });
 
     tokenRepo.saveAll(validUserToken);
+  }
+
+  private boolean isPasswordMatches(String rawPw, String encodedPw) {
+    return passwordEncoder.matches(rawPw, encodedPw);
   }
 }
