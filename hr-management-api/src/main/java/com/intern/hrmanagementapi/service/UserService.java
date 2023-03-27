@@ -67,4 +67,5 @@ public class UserService {
    }
    else {throw new ResourceNotFoundException("User not found with id: " + id);}
   }
+
 }

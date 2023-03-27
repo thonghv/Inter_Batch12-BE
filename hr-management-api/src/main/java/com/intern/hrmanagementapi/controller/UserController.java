@@ -78,7 +78,7 @@ public class UserController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteUser(@PathVariable String id) throws ResourceNotFoundException {
-    LoggerManager.info("call api Delete /users");
+    LoggerManager.info("call api Delete /user");
     try {
       userService.deleteUser(id);
       return new ResponseEntity<>("User has been deleted successfully", HttpStatus.OK);

@@ -23,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
