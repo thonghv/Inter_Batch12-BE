@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ObjectNotFoundException extends RuntimeException {
+public class ObjectException extends RuntimeException {
 
   @Serial
   private static final long serialVersionUID = 1L;

@@ -3,13 +3,22 @@ package com.intern.hrmanagementapi.constant;
 public class MessageConst {
 
   public static final String SUCCESS = "Success";
-  public static final String FILE_UPLOAD_DONE = "Uploaded the file successfully";
-  public static final String FILE_UPLOAD_FAILED = "Could not upload the file";
-  public static final String FILE_NOT_EXIST = "File doesn't exist";
-  public static final String FILE_UPLOAD_EMPTY = "File upload empty";
-  public static final String FILE_ACCESS_DENIED = "No access to file";
-  public static final String FILE_READ_ERROR = "Can not read file";
-  public static final String USER_EXISTED = "User already exist";
+
+  public static final class File {
+
+    public static final String UPLOAD_DONE = "Uploaded the file successfully";
+    public static final String UPLOAD_FAILED = "Could not upload the file";
+    public static final String NOT_EXIST = "File doesn't exist";
+    public static final String UPLOAD_EMPTY = "File upload empty";
+    public static final String ACCESS_DENIED = "No access to file";
+    public static final String READ_ERROR = "Can not read file";
+  }
+
+  public static final class User {
+
+    public static final String EXISTED = "User already exist";
+    public static final String NOT_EXIST = "User is not exist";
+  }
 
   public static final class Client {
 
