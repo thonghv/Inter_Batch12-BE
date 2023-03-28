@@ -3,7 +3,7 @@ package com.intern.hrmanagementapi.service;
 import com.intern.hrmanagementapi.constant.MessageConst;
 import com.intern.hrmanagementapi.entity.TokenEntity;
 import com.intern.hrmanagementapi.entity.UserEntity;
-import com.intern.hrmanagementapi.exception.ObjectExistsException;
+import com.intern.hrmanagementapi.exception.ObjectException;
 import com.intern.hrmanagementapi.model.AuthenticationRequestDto;
 import com.intern.hrmanagementapi.model.AuthenticationResponseDto;
 import com.intern.hrmanagementapi.model.RegisterRequestDto;
@@ -40,24 +40,26 @@ public class AuthenticationService {
    * @param req the register request body
    * @return the jwt token
    */
-  public AuthenticationResponseDto register(RegisterRequestDto req) throws ObjectExistsException {
+  public AuthenticationResponseDto register(RegisterRequestDto req) throws ObjectException {
 
-    UserEntity existedUser = userRepo.findByEmail(req.getEmail()).orElse(null);
-    UserEntity existedUserByUsername = userRepo.findByUsername(req.getUsername()).orElse(null);
+    String reqEmail = req.getEmail();
+    String reqUsername = req.getUsername();
+    String reqPw = req.getPassword();
 
-    if (existedUser != null) {
-      throw new ObjectExistsException(
-          String.format("%s - %s", req.getEmail(), MessageConst.USER_EXISTED),
+    UserEntity existedUserByEmail = userRepo.findByEmail(reqEmail).orElse(null);
+    UserEntity existedUserByUsername = userRepo.findByUsername(reqUsername).orElse(null);
+
+    if (existedUserByEmail != null) {
+      throw new ObjectException(String.format("%s - %s", reqEmail, MessageConst.User.EXISTED),
           HttpStatus.BAD_REQUEST, null);
     }
     if (existedUserByUsername != null) {
-      throw new ObjectExistsException(
-          String.format("%s - %s", req.getUsername(), MessageConst.USER_EXISTED),
+      throw new ObjectException(String.format("%s - %s", reqUsername, MessageConst.User.EXISTED),
           HttpStatus.BAD_REQUEST, null);
     }
 
-    UserEntity user = UserEntity.builder().username(req.getUsername()).email(req.getEmail())
-        .password(passwordEncoder.encode(req.getPassword())).role(UserRole.USER).build();
+    UserEntity user = UserEntity.builder().username(reqUsername).email(reqEmail)
+        .password(passwordEncoder.encode(reqPw)).role(UserRole.USER).build();
 
     UserEntity savedUser = userRepo.save(user);
     String jwtToken = jwtService.generateToken(user);
@@ -72,16 +74,25 @@ public class AuthenticationService {
    * @param req the login request body
    * @return the jwt token
    */
-  public AuthenticationResponseDto authenticate(AuthenticationRequestDto req) {
+  public AuthenticationResponseDto authenticate(AuthenticationRequestDto req)
+      throws ObjectException {
 
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
+    String reqEmail = req.getEmail();
+    String reqPw = req.getPassword();
+    UserEntity user = userRepo.findByEmail(reqEmail).orElse(null);
 
-    UserEntity user = userRepo.findByEmail(req.getEmail()).orElseThrow();
+    if (user == null || !isPasswordMatches(reqPw, user.getPassword())) {
+      throw new ObjectException(String.format("%s - %s", MessageConst.User.NOT_EXIST),
+          HttpStatus.BAD_REQUEST, null);
+    }
+
+    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(reqEmail, reqPw));
 
     String jwtToken = jwtService.generateToken(user);
+
     revokedAllUserToken(user);
     saveUserToken(user, jwtToken);
+
     return AuthenticationResponseDto.builder().token(jwtToken).build();
   }
 
@@ -102,5 +113,9 @@ public class AuthenticationService {
     });
 
     tokenRepo.saveAll(validUserToken);
+  }
+
+  private boolean isPasswordMatches(String rawPw, String encodedPw) {
+    return passwordEncoder.matches(rawPw, encodedPw);
   }
 }
