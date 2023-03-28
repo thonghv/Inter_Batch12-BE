@@ -15,4 +15,9 @@ public final class EndpointConst {
   public static final String FILE_GET_BY_ID = "{id}";
   public static final String FILE_UPLOAD_ONE = "/upload";
   public static final String FILE_DOWNLOAD = "/download/{id}";
+
+  public static final class User {
+
+    public static final String CHANGE_PASSWORD = "/change-password";
+  }
 }

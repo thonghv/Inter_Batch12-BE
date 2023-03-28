@@ -82,8 +82,7 @@ public class AuthenticationService {
     UserEntity user = userRepo.findByEmail(reqEmail).orElse(null);
 
     if (user == null || !isPasswordMatches(reqPw, user.getPassword())) {
-      throw new ObjectException(String.format("%s - %s", MessageConst.User.NOT_EXIST),
-          HttpStatus.BAD_REQUEST, null);
+      throw new ObjectException(MessageConst.User.NOT_EXIST, HttpStatus.BAD_REQUEST, null);
     }
 
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(reqEmail, reqPw));

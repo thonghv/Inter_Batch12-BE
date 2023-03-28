@@ -194,15 +194,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return this.handleExceptionInternal(ex, body, headers, status, request);
   }
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<?> handleException(Exception ex) {
-    LoggerManager.error(ex.getMessage());
-
-    return ResponseEntity.badRequest().body(
-        DataResponseDto.error(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
-            ex.getLocalizedMessage()));
-  }
-
   @ExceptionHandler(AuthenticationException.class)
   public ResponseEntity<?> handleAuthenticationException(AuthenticationException ex) {
     LoggerManager.error(ex.getMessage());
