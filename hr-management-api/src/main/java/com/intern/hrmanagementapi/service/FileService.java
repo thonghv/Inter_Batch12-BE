@@ -3,7 +3,7 @@ package com.intern.hrmanagementapi.service;
 import com.intern.hrmanagementapi.constant.MessageConst;
 import com.intern.hrmanagementapi.entity.FileEntity;
 import com.intern.hrmanagementapi.entity.UserEntity;
-import com.intern.hrmanagementapi.exception.ObjectNotFoundException;
+import com.intern.hrmanagementapi.exception.ObjectException;
 import com.intern.hrmanagementapi.model.DataResponseDto;
 import com.intern.hrmanagementapi.model.FileResponseDto;
 import com.intern.hrmanagementapi.repo.FileRepo;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -47,7 +48,7 @@ public class FileService {
 
     if (files.size() == 0) {
       response = DataResponseDto.error(HttpStatus.BAD_REQUEST.value(),
-          HttpStatus.BAD_REQUEST.name(), String.format("%s", MessageConst.FILE_UPLOAD_EMPTY));
+          HttpStatus.BAD_REQUEST.name(), String.format("%s", MessageConst.File.UPLOAD_EMPTY));
       return response;
     }
 
@@ -72,7 +73,7 @@ public class FileService {
       storedFiles.add(newFile);
     }
     fileRepo.saveAll(storedFiles);
-    response = DataResponseDto.success(HttpStatus.OK.value(), MessageConst.FILE_UPLOAD_DONE, null);
+    response = DataResponseDto.success(HttpStatus.OK.value(), MessageConst.File.UPLOAD_DONE, null);
     return response;
   }
 
@@ -83,10 +84,10 @@ public class FileService {
    * @return the file or null
    * @throws ObjectNotFoundException the object not found exception
    */
-  public FileResponseDto getFile(UUID fileId) throws ObjectNotFoundException {
+  public FileResponseDto getFile(UUID fileId) throws ObjectException {
     FileEntity resFile = fileRepo.findById(fileId).orElse(null);
     if (resFile == null) {
-      throw new ObjectNotFoundException(MessageConst.FILE_NOT_EXIST, HttpStatus.BAD_REQUEST, null);
+      throw new ObjectException(MessageConst.File.NOT_EXIST, HttpStatus.BAD_REQUEST, null);
     }
     String fileDownloadUri = FileUtil.getFileDownloadUri(resFile.getId().toString());
     var res = new FileResponseDto(resFile.getName(), fileDownloadUri, resFile.getType(),
@@ -105,7 +106,7 @@ public class FileService {
   public FileEntity getFileById(UUID fileId) throws ObjectNotFoundException {
     FileEntity resFile = fileRepo.findById(fileId).orElse(null);
     if (resFile == null) {
-      throw new ObjectNotFoundException(MessageConst.FILE_NOT_EXIST, HttpStatus.BAD_REQUEST, null);
+      throw new ObjectException(MessageConst.File.NOT_EXIST, HttpStatus.BAD_REQUEST, null);
     }
     return resFile;
   }
