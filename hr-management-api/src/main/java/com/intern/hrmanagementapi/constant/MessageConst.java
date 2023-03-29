@@ -28,6 +28,12 @@ public class MessageConst {
     public static final String UNAUTHORIED = "Unauthorized";
   }
 
+  public static final class Employee {
+
+    public static final String EXISTED = "Employee already exist";
+    public static final String NOT_EXIST = "Employee is not exist";
+  }
+
   public static final class Server {
 
     public static final String ERROR = "SERVER ERROR";
