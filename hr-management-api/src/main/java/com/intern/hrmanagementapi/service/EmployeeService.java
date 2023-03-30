@@ -1,6 +1,7 @@
 package com.intern.hrmanagementapi.service;
 
 import com.intern.hrmanagementapi.entity.Employee;
+import com.intern.hrmanagementapi.exception.EmployeeNotFoundException;
 import com.intern.hrmanagementapi.repo.EmployeeRepo;
 
 //import com.intern.hrmanagementapi.specification.SearchRequest;
@@ -9,6 +10,7 @@ import com.intern.hrmanagementapi.repo.EmployeeRepo;
 import jakarta.persistence.criteria.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +18,9 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -71,10 +75,16 @@ public class EmployeeService {
      * @param id the ID of the employee to be deleted
      * @return a message indicating that the employee has been removed
      */
-    public String deleteEmployee(UUID id) {
-        repository.deleteById(id);
-        return "Employee removed !! " + id;
+    public void deleteEmployee(UUID id) {
+        Employee e = repository.findById(id).orElse(null);
+        if (e==null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found");
+        }else{
+            repository.deleteById(id);
+        }
     }
+
+
 
     /**
      * Updates the information of an existing employee.
