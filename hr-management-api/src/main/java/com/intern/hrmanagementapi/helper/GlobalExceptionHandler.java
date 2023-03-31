@@ -42,7 +42,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler2 extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @Override
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -192,15 +192,6 @@ public class GlobalExceptionHandler2 extends ResponseEntityExceptionHandler {
     ProblemDetail body = this.createProblemDetail(ex, status, defaultDetail, messageCode, args,
         request);
     return this.handleExceptionInternal(ex, body, headers, status, request);
-  }
-
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<?> handleException(Exception ex) {
-    LoggerManager.error(ex.getMessage());
-
-    return ResponseEntity.badRequest().body(
-        DataResponseDto.error(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
-            ex.getLocalizedMessage()));
   }
 
   @ExceptionHandler(AuthenticationException.class)

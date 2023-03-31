@@ -13,8 +13,8 @@ public class ObjectException extends RuntimeException {
 
   @Serial
   private static final long serialVersionUID = 1L;
-  private final String error;
-  private final HttpStatus httpStatus;
+  private String error;
+  private HttpStatus httpStatus;
   private Throwable originalError;
 
 }
