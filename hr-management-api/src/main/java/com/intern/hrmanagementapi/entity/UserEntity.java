@@ -39,12 +39,12 @@ public class UserEntity implements UserDetails {
 
   @Column(nullable = false, unique = true)
   private String email;
-
   private String password;
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
   @Enumerated(EnumType.STRING)
+  @Column(name="state")
   private UserState state;
 
   @OneToOne
