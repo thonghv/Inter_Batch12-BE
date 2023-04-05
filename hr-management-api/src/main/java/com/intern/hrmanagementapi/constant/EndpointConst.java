@@ -2,7 +2,7 @@ package com.intern.hrmanagementapi.constant;
 
 public final class EndpointConst {
 
-  protected static final String ROOT_V1 = "/api/v1";
+  private static final String ROOT_V1 = "/api/v1";
 
   public static final String EMPLOYEE_BASE_PATH = ROOT_V1 + "/employee";
   public static final String EMPLOYEE_LIST = "/batch";
@@ -20,4 +20,8 @@ public final class EndpointConst {
   public static final String FILE_UPLOAD_ONE = "/upload";
   public static final String FILE_DOWNLOAD = "/download/{id}";
 
+  public static final class User {
+
+    public static final String CHANGE_PASSWORD = "/change-password";
+  }
 }

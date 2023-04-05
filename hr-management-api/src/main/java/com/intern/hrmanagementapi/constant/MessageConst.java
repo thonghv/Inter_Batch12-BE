@@ -18,6 +18,8 @@ public class MessageConst {
 
     public static final String EXISTED = "User already exist";
     public static final String NOT_EXIST = "User is not exist";
+    public static final String CHANGE_PW_OK = "Change password successfully";
+    public static final String PW_INCORRECT = "Currrent password is incorrect";
   }
 
   public static final class Client {

@@ -25,15 +25,15 @@ public class SecurityConfig {
 
   private final AuthenticationProvider authenticationProvider;
   private final LogoutHandler logoutHandler;
-  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**","/api/v1/employee/**", "/swagger-ui/**", "/v3/api-docs/**"};
+  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**"};
   @Autowired
   private final JwtAuthFilter jwtAuthFilter;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.csrf().disable().authorizeHttpRequests().requestMatchers(AUTH_WHITE_LIST).permitAll()
-        .anyRequest().authenticated();
+    http.cors().and().csrf().disable().authorizeHttpRequests().requestMatchers(AUTH_WHITE_LIST)
+        .permitAll().anyRequest().authenticated();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
