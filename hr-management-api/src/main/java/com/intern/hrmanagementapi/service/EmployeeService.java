@@ -1,25 +1,27 @@
 package com.intern.hrmanagementapi.service;
 
 import com.intern.hrmanagementapi.entity.Employee;
+import com.intern.hrmanagementapi.exception.EmployeeNotFoundException;
 import com.intern.hrmanagementapi.repo.EmployeeRepo;
 
-import com.intern.hrmanagementapi.specification.EmployeeSpecification;
+//import com.intern.hrmanagementapi.specification.SearchRequest;
+//import com.intern.hrmanagementapi.specification.SearchSpecification;
 
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import org.springframework.data.jpa.domain.Specification;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,11 +63,10 @@ public class EmployeeService {
      * Get an employee by id
      *
      * @param id the id of the employee to retrieve
-     * @return the employee with the specified id or exception if not found
+     * @return the employee with the specified id or null if not found
      */
     public Employee getEmployeeById(UUID id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee with id " + id + " not found"));
+        return repository.findById(id).orElse(null);
     }
 
     /**
@@ -92,41 +93,16 @@ public class EmployeeService {
      * @return The updated employee object.
      */
     public Employee updateEmployee(Employee employee) {
-        Employee existingEmployee = repository.findById(employee.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Employee not found"));
-
-        if (employee.getFirstName() != null) {
-            existingEmployee.setFirstName(employee.getFirstName());
-        }
-        if (employee.getLastName() != null) {
-            existingEmployee.setLastName(employee.getLastName());
-        }
-        Integer gender = employee.getGender();
-        if (gender != null) {
-            existingEmployee.setGender(gender);
-        }
-        if (employee.getAddress() != null) {
-            existingEmployee.setAddress(employee.getAddress());
-        }
-        if (employee.getDob() != null) {
-            existingEmployee.setDob(employee.getDob());
-        }
-        Integer departmentId = employee.getDepartmentId();
-        if (departmentId != null) {
-            existingEmployee.setDepartmentId(employee.getDepartmentId());
-        }
-        Integer positionId = employee.getPositionId();
-        if (positionId != null) {
-            existingEmployee.setPositionId(employee.getPositionId());
-        }
-        Integer contractId = employee.getContractId();
-        if (contractId != null) {
-            existingEmployee.setContractId(employee.getContractId());
-        }
-        Integer educationId = employee.getEducationId();
-        if (educationId != null) {
-            existingEmployee.setEducationId(employee.getEducationId());
-        }
+        Employee existingEmployee = repository.findById(employee.getId()).orElse(null);
+        existingEmployee.setFirstName(employee.getFirstName());
+        existingEmployee.setLastName(employee.getLastName());
+        existingEmployee.setGender(employee.getGender());
+        existingEmployee.setAddress(employee.getAddress());
+        existingEmployee.setDob(employee.getDob());
+        existingEmployee.setDepartmentId(employee.getDepartmentId());
+        existingEmployee.setPositionId(employee.getPositionId());
+        existingEmployee.setContractId(employee.getContractId());
+        existingEmployee.setEducationId(employee.getEducationId());
         return repository.save(existingEmployee);
     }
 
@@ -148,15 +124,33 @@ public class EmployeeService {
         return repository.findAll(pageable);
     }
 
-    public Page<Employee> list(UUID id, String firstName, String lastName, Integer gender, String address, LocalDateTime dob,
-                               Integer departmentId, Integer positionId,Integer contractId,Integer educationId,
-                               int pageNumber,int pageSize){
-        Specification<Employee> specification = EmployeeSpecification.getSpec(id,firstName,lastName,gender,address,dob,departmentId,positionId,contractId,educationId);
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return repository.findAll(specification,pageable);
+    /**
+     * Retrieves a page of employees matching the given name, sorted by name, and with pagination.
+     *
+     * @param name The name to search for.
+     * @param pageNumber The page number to retrieve (starting from 0).
+     * @param pageSize The number of elements to retrieve per page.
+     * @return A page of employees matching the given name.
+     */
 
+//    public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
+//        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+//        return repository.findByNameContainingIgnoreCase(name, pageable);
+//    }
+//    public Page<Employee> getEmployeeByName(String name, int pageNumber, int pageSize) {
+//        Specification<Employee> spec = (root, query, criteriaBuilder) -> {
+//            Predicate firstNamePredicate = criteriaBuilder.like(root.get("firstName"), "%" + name + "%");
+//            Predicate lastNamePredicate = criteriaBuilder.like(root.get("lastName"), "%" + name + "%");
+//            return criteriaBuilder.or(firstNamePredicate, lastNamePredicate);
+//        };
+//        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+//        return repository.findAll(spec, pageable);
+//    }
 
-    }
+//    public Page<Employee> searchOperatingSystem(SearchRequest request) {
+//        SearchSpecification<Employee> specification = new SearchSpecification<>(request);
+//        Pageable pageable = SearchSpecification.getPageable(request.getPage(), request.getSize());
+//        return repository.findAll(specification, pageable);
 
-
+//    }
 }
