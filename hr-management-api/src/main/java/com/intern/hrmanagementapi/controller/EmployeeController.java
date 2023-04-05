@@ -7,14 +7,13 @@ import com.intern.hrmanagementapi.exception.EmployeeNotFoundException;
 import com.intern.hrmanagementapi.model.DataResponseDto;
 import com.intern.hrmanagementapi.service.EmployeeService;
 
-//import com.intern.hrmanagementapi.specification.SearchRequest;
-
+import com.intern.hrmanagementapi.specification.EmployeeSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,7 +46,6 @@ public class EmployeeController {
 
 
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
-
     @PostMapping(value = {EndpointConst.EMPLOYEE_LIST})
     public ResponseEntity<?> addEmployees(@Valid  @RequestBody List<Employee> employees) {
         var response =  service.saveEmployees(employees);
@@ -55,26 +54,8 @@ public class EmployeeController {
     }
 
 
-//    @Operation(security = {@SecurityRequirement(name = "bearer-key")})
-//    @GetMapping()
-//    public ResponseEntity<?> getEmployees(@RequestParam(required = false) String orderBy,
-//                                          @RequestParam(required = false) String name,
-//                                          @RequestParam int pageNumber,
-//                                          @RequestParam int pageSize) {
-//        if (name != null) {
-//            var response = service.getEmployeeByName(name, pageNumber, pageSize);
-//            return ResponseEntity.ok(
-//                    DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
-//        } else {
-//            var response = service.getEmployeesByPageAndSort(orderBy, pageNumber, pageSize);
-//            return ResponseEntity.ok(
-//                    DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
-//        }
-//    }
-
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
-
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findEmployeeById(@PathVariable UUID id) {
         var response =  service.getEmployeeById(id);
         return ResponseEntity.ok(DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
@@ -99,10 +80,24 @@ public class EmployeeController {
             }
     }
 
-//    @PostMapping("/search")
-//    public Page<Employee> search(@RequestBody SearchRequest request) {
-//        return service.searchOperatingSystem(request);
-//    }
+    @Operation(security = {@SecurityRequirement(name = "bearer-key")})
+    @PostMapping("/filter")
+    public ResponseEntity<?> list(@RequestParam(required = false) UUID id,
+                               @RequestParam(required = false) String firstName,
+                               @RequestParam(required = false) String lastName,
+                               @RequestParam(required = false) Integer gender,
+                               @RequestParam(required = false) String address,
+                               @RequestParam(required = false) LocalDateTime dob,
+                               @RequestParam(required = false) Integer departmentId,
+                               @RequestParam(required = false) Integer positionId,
+                               @RequestParam(required = false) Integer contractId,
+                               @RequestParam(required = false) Integer educationId,
 
+                               @RequestParam int pageNumber,
+                               @RequestParam int pageSize){
+        var response =  service.list(id,firstName,lastName,gender,address,dob,departmentId,positionId,contractId,educationId,pageNumber,pageSize);
+        return ResponseEntity.ok(DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
+
+    }
 
 }
