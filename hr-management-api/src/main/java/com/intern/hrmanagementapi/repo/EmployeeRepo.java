@@ -29,18 +29,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, UUID> {
     Page<Employee> findByNameContainingIgnoreCase(@Param("name") String name, Pageable pageable);
 
 
-
-//    Page<Employee> findByNameContainingIgnoreCase(String name, Pageable pageable);
-//    default Page<Employee> findEmployees(String name, int pageNumber, int pageSize) {
-//        Specification<Employee> spec = (root, query, criteriaBuilder) -> {
-//            Predicate firstNamePredicate = criteriaBuilder.like(root.get("firstName"), "%" + name + "%");
-//            Predicate lastNamePredicate = criteriaBuilder.like(root.get("lastName"), "%" + name + "%");
-//            return criteriaBuilder.or(firstNamePredicate, lastNamePredicate);
-//        };
-//        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-//        return findAll(spec, pageable);
-//    }
-
-
     Page<Employee> findAll(Specification<Employee> spec, Pageable pageable);
+    public List<Employee> findAll(Specification<Employee> spec);
 }
