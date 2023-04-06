@@ -1,63 +1,71 @@
 package com.intern.hrmanagementapi.service;
 
 import com.intern.hrmanagementapi.entity.DepartmentEntity;
+import com.intern.hrmanagementapi.exception.ResourceAlreadyExistsException;
+import com.intern.hrmanagementapi.exception.ResourceNotFoundException;
 import com.intern.hrmanagementapi.repo.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
+import org.springframework.validation.annotation.Validated;
 
-import java.lang.reflect.Field;
-import java.util.Map;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Validated
 public class DepartmentService {
     @Autowired
     DepartmentRepo departmentRepo;
-
-    public Object getAllDepartment() {
-        return departmentRepo.findAll();
-    }
-
-    public DepartmentEntity findOne(int id) {
-        return (DepartmentEntity) departmentRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid department id: " + id));
-    }
-
-    public void add(DepartmentEntity department) {
-        departmentRepo.save(department);
-    }
-
-    public boolean update(DepartmentEntity department) {
-        if (!departmentRepo.existsById(department.getId())) {
-            return false;
+    public List<DepartmentEntity> getAllDepartment(String name, String orderBy, int page, int size) throws ResourceNotFoundException {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy).descending());
+        List<DepartmentEntity> userEntityList;
+        if (name != null) {
+            userEntityList = departmentRepo.findBynameContaining(name, pageable);
+        } else {
+            userEntityList = departmentRepo.findAll(pageable).getContent();
         }
-        DepartmentEntity updatedepartment = (DepartmentEntity) departmentRepo.findById(department.getId()).get();
-        departmentRepo.save(updatedepartment);
-        return true;
-    }
-
-    public boolean updateFields(int id, Map<String, Object> fields) {
-        Optional<DepartmentEntity> updatedepartment = departmentRepo.findById(id);
-
-        if (!updatedepartment.isPresent()) {
-            return false;
+        if (userEntityList.isEmpty()) {
+            throw new ResourceNotFoundException("No user found");
         }
-        fields.forEach(
-                (key, value) -> {
-                    Field field = ReflectionUtils.findField(DepartmentEntity.class, key);
-                    field.setAccessible(true);
-                    ReflectionUtils.setField(field, updatedepartment.get(), value);
-                });
-        departmentRepo.save(updatedepartment.get());
-        return true;
+        return userEntityList;
     }
 
-    public void deleteOne(int departmentId) {
-        departmentRepo.deleteById(departmentId);
+    public DepartmentEntity getDepartment(int id) throws ResourceNotFoundException {
+        return departmentRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found with id:" + id));
     }
 
-    public void deleteAll() {
-        departmentRepo.deleteAll();
+    public DepartmentEntity addDepartment(DepartmentEntity department) throws ResourceAlreadyExistsException {
+        if (departmentRepo.findByname(department.getName()).isPresent()) {
+            throw new ResourceAlreadyExistsException("Department already exists with name: " + department.getName());
+        }
+        return departmentRepo.save(department);
+    }
+
+    public DepartmentEntity updateDepartment(DepartmentEntity department) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+        Optional<DepartmentEntity> departmentEntity = departmentRepo.findById(department.getId());
+        Optional<DepartmentEntity> departmentEntity1 = departmentRepo.findByname(department.getName());
+        if (!departmentEntity.isPresent()) {
+            throw new ResourceNotFoundException("Department not found with id: " + department.getId());
+        }
+        if (departmentEntity1.isPresent()) {
+            throw new ResourceAlreadyExistsException("name already exists");
+        }
+        department.setUpdateDate(new Date());
+        return departmentRepo.save(department);
+
+    }
+
+    public void deleteDepartment(int id) throws ResourceNotFoundException {
+        Optional<DepartmentEntity> department = departmentRepo.findById(id);
+        if (department.isPresent()) {
+            departmentRepo.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Department not found with id: " + id);
+        }
     }
 }
