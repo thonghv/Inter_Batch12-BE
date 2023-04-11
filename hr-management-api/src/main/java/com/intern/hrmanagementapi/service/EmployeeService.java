@@ -158,5 +158,9 @@ public class EmployeeService {
 
     }
 
+    public List<Employee> listAll() {
+        return repository.findAll(Sort.by("id").ascending());
+    }
+
 
 }

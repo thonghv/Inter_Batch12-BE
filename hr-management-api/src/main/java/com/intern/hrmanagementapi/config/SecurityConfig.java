@@ -26,7 +26,7 @@ public class SecurityConfig {
   private final AuthenticationProvider authenticationProvider;
   private final LogoutHandler logoutHandler;
 
-  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**","/api/v1/users/**","/api/v1/departments/**"};
+  private final String[] AUTH_WHITE_LIST = {"/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**","/api/v1/users/**","/api/v1/employee/**","/api/v1/departments/**"};
 
   @Autowired
   private final JwtAuthFilter jwtAuthFilter;

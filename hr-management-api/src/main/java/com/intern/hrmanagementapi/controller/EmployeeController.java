@@ -1,6 +1,7 @@
 package com.intern.hrmanagementapi.controller;
 
 import com.intern.hrmanagementapi.constant.EndpointConst;
+import com.intern.hrmanagementapi.constant.ExcelExporter;
 import com.intern.hrmanagementapi.constant.MessageConst;
 import com.intern.hrmanagementapi.entity.Employee;
 import com.intern.hrmanagementapi.exception.EmployeeNotFoundException;
@@ -10,6 +11,7 @@ import com.intern.hrmanagementapi.service.EmployeeService;
 import com.intern.hrmanagementapi.specification.EmployeeSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 import java.util.Date;
@@ -96,6 +101,25 @@ public class EmployeeController {
                                @RequestParam int pageNumber,
                                @RequestParam int pageSize){
         var response =  service.list(id,firstName,lastName,gender,address,dob,departmentId,positionId,contractId,educationId,pageNumber,pageSize);
+        return ResponseEntity.ok(DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
+
+    }
+    @Operation(security = {@SecurityRequirement(name = "bearer-key")})
+    @GetMapping("/export")
+    public ResponseEntity<?>  exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=List_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Employee> list = service.listAll();
+
+        ExcelExporter excelExporter = new ExcelExporter(list);
+
+        excelExporter.export(response);
         return ResponseEntity.ok(DataResponseDto.success(HttpStatus.OK.value(), MessageConst.SUCCESS, response));
 
     }
