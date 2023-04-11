@@ -9,8 +9,6 @@ public class LoggerManager {
     private static final Logger WARN = LoggerFactory.getLogger("warnLog");
     private static final Logger DEBUG = LoggerFactory.getLogger("debugLog");
     private static final Logger TRACE = LoggerFactory.getLogger("traceLog");
-    private static final Logger ERROR_WORKER = LoggerFactory.getLogger("errorWorkerLog");
-    private static final Logger INFO_KAFKA = LoggerFactory.getLogger("infoKafkaLog");
 
     public static void info(String message) {
         INFO.info(message);
@@ -31,14 +29,4 @@ public class LoggerManager {
     public static void trace(String message) {
         TRACE.trace(message);
     }
-
-    public static void errorWorker(String message, Throwable ex) {
-        ERROR_WORKER.error(message, ex);
-    }
-
-    public static void infoKafka(String message, Throwable ex) {
-        INFO_KAFKA.info(message, ex);
-    }
-
-
 }
